@@ -1,15 +1,21 @@
 {
   "name": "NeonChat",
   "short_name": "NeonChat",
-  "start_url": "index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0b0f19",
   "theme_color": "#06b6d4",
   "icons": [
     {
-      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='120' fill='%230b0f19'/%3E%3Cpath d='M130 160h252v160H210l-80 80z' fill='none' stroke='%2306b6d4' stroke-width='36' stroke-linejoin='round'/%3E%3Ccircle cx='200' cy='240' r='18' fill='%23ec4899'/%3E%3Ccircle cx='256' cy='240' r='18' fill='%2306b6d4'/%3E%3Ccircle cx='312' cy='240' r='18' fill='%23ec4899'/%3E%3C/svg%3E",
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
