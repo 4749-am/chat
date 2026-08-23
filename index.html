@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NeonChat</title>
+    
+    <!-- PWA Meta tags -->
+    <meta name="theme-color" content="#0b0f19">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Police Orbitron depuis Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Icônes Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Lueurs d'arrière-plan néon -->
+    <div class="neon-bg-glow glow-1"></div>
+    <div class="neon-bg-glow glow-2"></div>
+
+    <div class="chat-container">
+        <!-- En-tête -->
+        <header class="chat-header">
+            <div class="header-left">
+                <span class="status-dot"></span>
+                <h1 data-i18n-title>NeonChat</h1>
+            </div>
+            
+            <div class="header-right">
+                <span id="usernameDisplay" class="username-badge">Anonyme</span>
+                
+                <!-- Bouton Pseudo -->
+                <button id="settingsBtn" class="control-btn" title="Changer de pseudo">
+                    <i data-lucide="user" style="width: 16px; height: 16px;"></i>
+                </button>
+
+                <!-- Bouton Thème Clair/Sombre -->
+                <button id="themeToggleBtn" class="control-btn" title="Changer de mode">
+                    <i data-lucide="moon" style="width: 16px; height: 16px;"></i>
+                </button>
+
+                <!-- Bouton Langue FR/EN -->
+                <button id="langToggleBtn" class="control-btn" title="Changer de langue">EN</button>
+            </div>
+        </header>
+
+        <!-- Messages -->
+        <main id="messagesContainer" class="messages-container">
+            <div class="message incoming">
+                <div class="message-info">
+                    <span class="msg-user">System</span>
+                    <span class="msg-time">00:00</span>
+                </div>
+                <div class="message-bubble" data-i18n-welcome>
+                    Bienvenue sur NeonChat ! Prêt à brancher le temps réel ?
+                </div>
+            </div>
+        </main>
+
+        <!-- Barre de saisie -->
+        <footer class="chat-input-area">
+            <input type="text" id="messageInput" data-i18n-placeholder="searchPlaceholder" placeholder="Écris ton message..." autocomplete="off">
+            <button id="sendBtn" class="send-btn" title="Envoyer">
+                <i data-lucide="send" style="width: 18px; height: 18px;"></i>
+            </button>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
