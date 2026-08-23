@@ -15,13 +15,13 @@ const langToggleBtn = document.getElementById("langToggleBtn");
 const translations = {
     fr: {
         title: "NeonChat",
-        welcome: "Bienvenue sur NeonChat (Mode Éphémère) ! 🚀",
+        welcome: "Bienvenue sur NeonChat (Mode Éphémère) ! ",
         placeholder: "Écris ton message...",
         promptUser: "Entre ton nouveau pseudo :"
     },
     en: {
         title: "NeonChat",
-        welcome: "Welcome to NeonChat (Ephemeral Mode)! 🚀",
+        welcome: "Welcome to NeonChat (Ephemeral Mode)! ",
         placeholder: "Type your message...",
         promptUser: "Enter your new username:"
     }
