@@ -1,3 +1,9 @@
+// --- CONFIGURATION ABLY (Temps réel éphémère & ultra-stable) ---
+const ABLY_API_KEY = 'i7v9DA.gUNH6g:jOzlzqHsnS_vi4mgykAtJrE0QrwHz2wKObz1LFTsAYo';
+
+const realtime = new Ably.Realtime(ABLY_API_KEY);
+const channel = realtime.channels.get('neonchat-room');
+
 const messagesContainer = document.getElementById("messagesContainer");
 const messageInput = document.getElementById("messageInput");
 const sendBtn = document.getElementById("sendBtn");
@@ -34,35 +40,12 @@ usernameDisplay.textContent = username;
 
 lucide.createIcons();
 
-// --- CONNEXION WEBSOCKET TEMPS RÉEL (Éphémère) ---
-// Utilisation d'un relais WebSocket public pour la démo
-const SOCKET_URL = "wss://socketsbay.com/wss/v2/2/demo/"; // Ou un autre service public de test
-let socket;
-
-function connectWebSocket() {
-    socket = new WebSocket(SOCKET_URL);
-
-    socket.onopen = () => {
-        console.log("Connecté au flux WebSocket en temps réel !");
-    };
-
-    socket.onmessage = (event) => {
-        try {
-            const data = JSON.parse(event.data);
-            const isOutgoing = (data.sender === username);
-            appendMessageToDOM(data.sender, data.text, data.time, isOutgoing);
-        } catch (e) {
-            console.log("Message brut reçu :", event.data);
-        }
-    };
-
-    socket.onclose = () => {
-        console.log("Déconnecté. Reconnexion en cours...");
-        setTimeout(connectWebSocket, 3000); // Reconnexion auto
-    };
-}
-
-connectWebSocket();
+// --- ECOUTE DES MESSAGES EN DIRECT (Éphémère) ---
+channel.subscribe('chat-message', (msg) => {
+    const data = msg.data;
+    const isOutgoing = (data.sender === username);
+    appendMessageToDOM(data.sender, data.text, data.time, isOutgoing);
+});
 
 // --- ÉVÉNEMENTS UI ---
 sendBtn.addEventListener("click", handleSendMessage);
@@ -109,25 +92,24 @@ function applyTranslations() {
     if (inputEl) inputEl.placeholder = t.placeholder;
 }
 
-// --- ENVOI D'UN MESSAGE ---
+// --- ENVOI D'UN MESSAGE (Sans stockage, diffusé en direct) ---
 function handleSendMessage() {
     const text = messageInput.value.trim();
     if (text === "") return;
 
     const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    const messageData = {
+    
+    // Publication sur le canal Ably (rien n'est enregistré sur aucun disque)
+    channel.publish('chat-message', {
         sender: username,
         text: text,
         time: timeStr
-    };
-
-    // Envoi via le WebSocket
-    if (socket && socket.readyState === WebSocket.OPEN) {
-        socket.send(JSON.stringify(messageData));
-    } else {
-        alert("Erreur de connexion au serveur temps réel.");
-        return;
-    }
+    }, (err) => {
+        if (err) {
+            console.error("Erreur d'envoi :", err);
+            alert("Erreur de transmission du message.");
+        }
+    });
 
     messageInput.value = "";
     messageInput.focus();
