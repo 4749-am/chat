@@ -178,6 +178,7 @@ body {
     font-weight: 600;
     font-family: var(--font-orbitron);
     transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 
 .control-btn:hover {
@@ -245,18 +246,35 @@ body {
     box-shadow: 0 4px 15px rgba(236, 72, 153, 0.15);
 }
 
+/* Style des images partagées dans le chat */
+.message-bubble img {
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+}
+
+.message-bubble img:hover {
+    transform: scale(1.02);
+}
+
 /* Zone de saisie */
 .chat-input-area {
     padding: 16px 20px;
     display: flex;
-    gap: 12px;
+    gap: 10px;
+    align-items: center;
     background: var(--card-bg);
     border-top: 1px solid var(--border-color);
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
 }
 
-.chat-input-area input {
+.chat-input-area input[type="text"] {
     flex: 1;
     background: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -269,7 +287,7 @@ body {
     transition: all 0.2s ease;
 }
 
-.chat-input-area input:focus {
+.chat-input-area input[type="text"]:focus {
     border-color: var(--neon-cyan);
     box-shadow: 0 0 12px var(--neon-cyan-glow);
 }

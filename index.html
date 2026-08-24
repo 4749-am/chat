@@ -69,7 +69,16 @@
 
         <!-- Barre de saisie -->
         <footer class="chat-input-area">
-            <input type="text" id="messageInput" data-i18n-placeholder="searchPlaceholder" placeholder="Écris ton message..." autocomplete="off">
+            <!-- Input fichier invisible pour l'envoi de photos avec compression -->
+            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+            
+            <!-- Bouton Trombone Pièce jointe -->
+            <button type="button" id="attachBtn" class="control-btn" title="Envoyer une photo">
+                <i data-lucide="paperclip" style="width: 18px; height: 18px;"></i>
+            </button>
+
+            <input type="text" id="messageInput" data-i18n-placeholder="searchPlaceholder" placeholder="Écris ton message ou ajoute des emojis..." autocomplete="off">
+            
             <button id="sendBtn" class="send-btn" title="Envoyer">
                 <i data-lucide="send" style="width: 18px; height: 18px;"></i>
             </button>
